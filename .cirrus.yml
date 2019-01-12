@@ -3,22 +3,6 @@ env:
 
 task:
   matrix:
-    - install_cmake_script: apt-get update && apt-get install -y cmake
-      matrix:
-        - name: test (linux)
-          container:
-            image: rust:1.31.0
-            cpu: 4
-            memory: 8G
-          rustfmt_script: rustup component add rustfmt-preview && cd rust && cargo fmt --all -- --check
-          clippy_script: rustup component add clippy-preview && cd rust && cargo clippy --all -- -D warnings
-
-        - name: test (linux nightly)
-          allow_failures: true
-          container:
-            image: rustlang/rust:nightly
-            cpu: 4
-            memory: 8G
     - osx_instance:
         image: high-sierra-xcode-9.4.1
       env:
